@@ -5,7 +5,9 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
 
-       [SerializeField] private float damage;   
+       [SerializeField] private float damage;  
+
+       
     
    
 
@@ -22,11 +24,15 @@ public class BulletScript : MonoBehaviour
         }
         if(collision.tag == "Walls")
         {
+            
             Destroy(gameObject);
+            
         }
          if (collision.tag == "Pushable")
         {
+            
               Destroy(gameObject);
+             
         }
     }
     
