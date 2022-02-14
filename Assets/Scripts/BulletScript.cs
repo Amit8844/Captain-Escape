@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,14 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
 
-       [SerializeField] private float damage;  
+       [SerializeField] private float damage;
+
+       public GameObject Effect;
+
+    public SpriteRenderer sr;
+    public TrailRenderer tr;
+
+    public Rigidbody2D rb;
 
        
     
@@ -17,23 +25,42 @@ public class BulletScript : MonoBehaviour
         {
 
             collision.GetComponent<Health>().TakeDamage(damage);
-            Destroy(this.gameObject);
-           
-                 
-            
+            PlayEffect();
+
+
+
         }
         if(collision.tag == "Walls")
         {
-            
-            Destroy(gameObject);
+
+            PlayEffect();
             
         }
-         if (collision.tag == "Pushable")
-        {
-            
-              Destroy(gameObject);
-             
-        }
+         
     }
-    
+
+    private void PlayEffect()
+    {
+        sr.enabled = false;
+        tr.enabled = false;
+        rb.velocity = Vector2.zero;
+
+        Effect.SetActive(true);
+
+        Effect.transform.position = transform.position; 
+        ParticleSystem[] effects = Effect.transform.GetComponentsInChildren<ParticleSystem>();
+
+        for (int i = 0; i < effects.Length; i++)
+        {
+            effects[i].Play();
+        }
+
+        StartCoroutine(DestroyBullet());
+    }
+
+    IEnumerator DestroyBullet()
+    {
+        yield return new WaitForSeconds(0.7f) ;
+        Destroy(this.gameObject);
+    }
 }
