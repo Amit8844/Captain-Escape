@@ -12,7 +12,7 @@ public class ScoreScript : MonoBehaviour
     void Start()
     {
         ScoreNum=0;
-        MyscoreText.text = "Score : " + ScoreNum;
+        MyscoreText.text = " :  " + ScoreNum;
     }
 
     void OnTriggerEnter2D(Collider2D Gem) 
@@ -21,7 +21,7 @@ public class ScoreScript : MonoBehaviour
         {
             ScoreNum += 1;
             Destroy(Gem.gameObject);
-            MyscoreText.text = "Score: " +  ScoreNum;
+            MyscoreText.text = " : " +  ScoreNum;
         }
     }
 

@@ -35,6 +35,7 @@ public class Health : MonoBehaviour
                  GetComponent<PlayerMovement>().enabled = false;
                  dead = true;
                   gameOver = true;
+                  
                  gameOverPanel.SetActive(true);
             }
             
